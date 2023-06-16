@@ -3,6 +3,8 @@ package com.example.appnotes.Adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,15 +21,23 @@ import com.example.appnotes.Entity.NoteEntity;
 import com.example.appnotes.R;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.logging.Logger;
 
 public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.viewholder>{
     List<NoteEntity> list;
     Context context;
+    private Timer timer;
+    private List<NoteEntity> noteList;
 
     public NotesAdapter(List<NoteEntity> list, Context context) {
         this.list = list;
         this.context=context;
+        noteList=list;
+
         notifyDataSetChanged();
     }
 
@@ -95,6 +105,40 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.viewholder>{
             tv_datetime=itemView.findViewById(R.id.tv_Datetime);
             img_note=itemView.findViewById(R.id.img_note);
 
+        }
+    }
+    public void searchnote(final String searchkey){
+        timer= new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                if (searchkey.trim().isEmpty()){
+                    list=noteList;
+                }else {
+                    ArrayList<NoteEntity> temp= new ArrayList<>();
+                    for (NoteEntity note: noteList
+                         ) {
+                         if (note.getTitle().toLowerCase().contains(searchkey.toLowerCase())
+                                 ||note.getSubtitle().toLowerCase().contains(searchkey.toLowerCase())
+                                 ||note.getNoteText().toLowerCase().contains(searchkey.toLowerCase())
+                         ){
+                             temp.add(note);
+                         }
+                    }
+                    list=temp;
+                }
+                new Handler(Looper.getMainLooper()).post(new Runnable() {
+                    @Override
+                    public void run() {
+                          notifyDataSetChanged();
+                    }
+                });
+            }
+        },500);
+    }
+    public void cancelTimer(){
+        if (timer!=null) {
+            timer.cancel();
         }
     }
 }
