@@ -11,6 +11,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 
 import com.example.appnotes.Adapter.NotesAdapter;
@@ -41,6 +43,24 @@ public class MainActivity extends AppCompatActivity {
         binding.noterecycleview.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
         binding.noterecycleview.setAdapter(adapter);
 
+        binding.edIpsearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                   adapter.cancelTimer();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                  if (list.size()!=0) {
+                      adapter.searchnote(editable.toString());
+                  }
+            }
+        });
     }
 
     @Override
