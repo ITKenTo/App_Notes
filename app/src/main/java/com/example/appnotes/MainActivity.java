@@ -61,6 +61,15 @@ public class MainActivity extends AppCompatActivity {
                   }
             }
         });
+
+        binding.imgAddimage.setOnClickListener(view -> {
+            startActivity(new Intent(this, CreateNotesActivity.class));
+        });
+
+        binding.imgAddnotes.setOnClickListener(view -> {
+            startActivity(new Intent(this, CreateNotesActivity.class));
+
+        });
     }
 
     @Override
