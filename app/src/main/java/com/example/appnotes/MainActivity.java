@@ -62,8 +62,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        binding.imgAddimage.setOnClickListener(view -> {
-            startActivity(new Intent(this, CreateNotesActivity.class));
+        binding.imgSetlock.setOnClickListener(view -> {
+            startActivity(new Intent(this, SetLockActivity.class));
         });
 
         binding.imgAddnotes.setOnClickListener(view -> {
