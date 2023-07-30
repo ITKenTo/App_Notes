@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:text="My Notes"
             android:textColor="@color/black"
-            android:textSize="25dp"
+            android:textSize="30dp"
             android:layout_marginTop="20dp"
             android:layout_marginRight="12dp"
             android:layout_marginLeft="12dp"
@@ -101,11 +101,11 @@
                 app:tint="@color/grayDark" />
 
             <ImageView
-                android:id="@+id/img_addimage"
+                android:id="@+id/img_setlock"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_marginStart="15dp"
-                android:src="@drawable/ic_baseline_add_photo_alternate_24"
+                android:src="@drawable/baseline_screen_lock_portrait_24"
                 app:tint="@color/grayDark" />
 
         </LinearLayout>
